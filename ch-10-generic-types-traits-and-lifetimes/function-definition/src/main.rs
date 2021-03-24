@@ -22,11 +22,24 @@ fn largest_char(list: &[char]) -> &char {
     largest
 }
 
-fn largest<T>(list: &[T]) -> T {
-    let mut largest = &list[0];
+// This can be fixed with trait bounds
+// fn largest<T>(list: &[T]) -> T {
+//     let mut largest = &list[0];
 
-    for item in list {
-        if item > largest { // This throws error because we cannot do > for all possible types T
+//     for item in list {
+//         if item > largest { // This throws error because we cannot do > for all possible types T
+//             largest = item;
+//         }
+//     }
+
+//     largest
+// }
+
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list {
+        if item > largest {
             largest = item;
         }
     }
@@ -43,5 +56,8 @@ fn main() {
     let char_list = vec!['y', 'm', 'c', 'a'];
 
     let result = largest_char(&char_list);
+    println!("The largest char is {}", result);
+
+    let result = largest(&char_list);
     println!("The largest char is {}", result);
 }
