@@ -17,5 +17,8 @@ fn main() {
     } else {
         println!("Using blue as the background color");
     }
+
+    // The downside of if-let expression is that the compiler doesn't check
+    // for exhaustiveness, whereas match expression does
 }
                 
